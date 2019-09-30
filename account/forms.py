@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from .models import Profile
 
 
+# custom but no need to use. We are using django auth view so login form will be automatically invoked
 class LoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)

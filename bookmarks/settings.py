@@ -26,7 +26,7 @@ SECRET_KEY = 'y1+0ek4s2nzex-n#5db2b0iml-1sg4_!4jx!eds4%ipfk973b6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['mysite.com']
 
 
 # Application definition
@@ -133,10 +133,13 @@ LOGIN_REDIRECT_URL = reverse_lazy('account:dashboard')
 LOGIN_URL = reverse_lazy('account:login')
 LOGOUT_URL = reverse_lazy('account:logout')
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# for console email
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# for smtp email
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_USER = 'an.anuraag@gmail.com'
-EMAIL_PASSWORD = '3UnTy!3###3'
+EMAIL_HOST_USER = 'an.anuraag@gmail.com'
+EMAIL_HOST_PASSWORD = '3UnTy!3###3'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 

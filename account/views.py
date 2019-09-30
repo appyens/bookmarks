@@ -9,7 +9,7 @@ from .models import Profile
 
 # Create your views here.
 
-
+# custom but no need to use. we are using django auth view for login and logout.
 def user_login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
