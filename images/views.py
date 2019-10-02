@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import ImageCreateForm
 from django.contrib import messages
-from .models import Image
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from bookmarks.common.decorators import ajax_required
-
+from .forms import ImageCreateForm
+from .models import Image
 # Create your views here.
 
 
@@ -16,9 +16,7 @@ def image_create(request):
     :param request:
     :return:
     """
-
     if request.method == 'POST':
-        print(request.POST)
         # form is sent
         form = ImageCreateForm(data=request.POST)
         if form.is_valid():
@@ -46,12 +44,6 @@ def image_detail(request, id, slug):
 @login_required
 @require_POST
 def image_like(request):
-    print(request.POST)
-
-    a = Image.objects.all().count()
-    request.a = a
-    b = request.a
-    print(b)
     image_id = request.POST.get('id')
     action = request.POST.get('action')
     if image_id and action:
@@ -65,3 +57,23 @@ def image_like(request):
         except:
             pass
     return JsonResponse({'status': 'ko'})
+
+
+def image_list(request):
+    images = Image.objects.all()
+    paginator = Paginator(images, per_page=8)
+    page = request.GET.get('page')
+    try:
+        images = paginator.page(page)
+    except PageNotAnInteger:
+        # if page is not an integer deliver the first page
+        images = paginator.page(1)
+    except EmptyPage:
+        if request.is_ajax():
+            # if the request is ajax and the page is out of range return an empty page
+            return HttpResponse('')
+        # if page is out of range deliver last page of results
+        images = paginator.page(paginator.num_pages)
+    if request.is_ajax():
+        return render(request, 'images/image/list_ajax.html', {'section': 'images', 'images': images})
+    return render(request, 'images/image/list.html', {'section': 'images', 'images': images})

@@ -26,7 +26,7 @@ SECRET_KEY = 'y1+0ek4s2nzex-n#5db2b0iml-1sg4_!4jx!eds4%ipfk973b6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['mysite.com']
+ALLOWED_HOSTS = ['mysite.com', '127.0.0.1']
 
 
 # Application definition
@@ -151,12 +151,15 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.facebook.FacebookOAuth2',
     'social_core.backends.google.GoogleOAuth2',
     'social_core.backends.twitter.TwitterOAuth',
-
 )
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '668074076182-aug9s2bdmr3rrm5s21ktcs5khnc6vtfe.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'klDfTwJJSnuXjiXHpLlRrIbC'
-SOCIAL_AUTH_TWITTER_KEY = ''
-SOCIAL_AUTH_TWITTER_SECRET = ''
-SOCIAL_AUTH_FACEBOOK_KEY = ''
-SOCIAL_AUTH_FACEBOOK_SECRET = ''
+SOCIAL_AUTH_TWITTER_KEY = 'XZVCbMn58HzbIl0LDThRAteB2'
+SOCIAL_AUTH_TWITTER_SECRET = 's5jnGDqVpbcZYBuoCZ2CrBDuP36hkQL01MPK5VA1o8M66TXxXA'
+SOCIAL_AUTH_FACEBOOK_KEY = '452482328691596'
+SOCIAL_AUTH_FACEBOOK_SECRET = '8044161db1e5111e964822fb68f8086b'
+#
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
+# SECURE_SSL_REDIRECT = True
