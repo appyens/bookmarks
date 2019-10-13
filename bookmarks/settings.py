@@ -132,6 +132,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 LOGIN_REDIRECT_URL = reverse_lazy('account:dashboard')
 LOGIN_URL = reverse_lazy('account:login')
 LOGOUT_URL = reverse_lazy('account:logout')
+# returns the get_absolute_url for given model, model name should be lowercase
+# takes user object and return url for it
+ABSOLUTE_URL_OVERRIDES = {
+    'auth.user': lambda u: reverse_lazy('account:user_detail', args=[u.username])
+}
 
 # for console email
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
